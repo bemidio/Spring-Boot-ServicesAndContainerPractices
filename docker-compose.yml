@@ -1,0 +1,10 @@
+version: '3'
+services:
+    servico:
+        image: check-install
+        container_name: teste-servico
+        restart: always
+        expose:
+            - "8090"
+        ports:
+            - 8090:8090
