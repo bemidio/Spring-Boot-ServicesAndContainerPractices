@@ -7,9 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,7 +34,7 @@ public class DetalhesPedido implements Serializable {
     @JsonIgnore 
     private Pedido pedido;
     
-    private int idProduto;
+    private int produtoId;
     private int quantidade;
     private BigDecimal valorUnitario;
 
@@ -57,12 +55,12 @@ public class DetalhesPedido implements Serializable {
     }
     
 
-    public int getIdProduto() {
-        return idProduto;
+    public int getProdutoId() {
+        return produtoId;
     }
 
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
+    public void setProdutoId(int idProduto) {
+        this.produtoId = idProduto;
     }
 
     public int getQuantidade() {
@@ -86,7 +84,7 @@ public class DetalhesPedido implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + id;
-        result = prime * result + idProduto;
+        result = prime * result + produtoId;
         result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
         result = prime * result + quantidade;
         result = prime * result + ((valorUnitario == null) ? 0 : valorUnitario.hashCode());
@@ -104,7 +102,7 @@ public class DetalhesPedido implements Serializable {
         DetalhesPedido other = (DetalhesPedido) obj;
         if (id != other.id)
             return false;
-        if (idProduto != other.idProduto)
+        if (produtoId != other.produtoId)
             return false;
         if (pedido == null) {
             if (other.pedido != null)

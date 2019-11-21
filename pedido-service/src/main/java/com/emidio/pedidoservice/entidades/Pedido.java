@@ -1,7 +1,6 @@
 package com.emidio.pedidoservice.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 /**
  * Pedido
@@ -25,14 +26,14 @@ public class Pedido implements Serializable {
 
     public Pedido() {
 
-      //  this.detalhesPedido = new ArrayList<DetalhesPedido>();
+        // this.detalhesPedido = new ArrayList<DetalhesPedido>();
     }
 
     @Id
     @GeneratedValue
     private int id;
 
-    private int idCliente;
+    private int clienteId;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "pedido")
     private List<DetalhesPedido> detalhesPedido;
@@ -56,28 +57,24 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getClienteId() {
+        return clienteId;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setClienteId(int idCliente) {
+        this.clienteId = idCliente;
     }
 
-    public Date getDataPedido() {
-        return dataPedido;
+    @PrePersist
+    public void prePersist() {
+        Date data = new Date();
+        this.dataPedido = data;
+        this.updateTimeStamp = data;
     }
 
-    public void setDataPedido(Date dataPedido) {
-        this.dataPedido = dataPedido;
-    }
-
-    public Date getUpdateTimeStamp() {
-        return updateTimeStamp;
-    }
-
-    public void setUpdateTimeStamp(Date updateTimeStamp) {
-        this.updateTimeStamp = updateTimeStamp;
+    @PreUpdate
+    public void preUpdate() {
+        this.updateTimeStamp = new Date();
     }
 
     @Override
@@ -86,7 +83,7 @@ public class Pedido implements Serializable {
         int result = 1;
         result = prime * result + ((dataPedido == null) ? 0 : dataPedido.hashCode());
         result = prime * result + id;
-        result = prime * result + idCliente;
+        result = prime * result + clienteId;
         result = prime * result + ((updateTimeStamp == null) ? 0 : updateTimeStamp.hashCode());
         return result;
     }
@@ -107,7 +104,7 @@ public class Pedido implements Serializable {
             return false;
         if (id != other.id)
             return false;
-        if (idCliente != other.idCliente)
+        if (clienteId != other.clienteId)
             return false;
         if (updateTimeStamp == null) {
             if (other.updateTimeStamp != null)
@@ -116,5 +113,5 @@ public class Pedido implements Serializable {
             return false;
         return true;
     }
-    
+
 }

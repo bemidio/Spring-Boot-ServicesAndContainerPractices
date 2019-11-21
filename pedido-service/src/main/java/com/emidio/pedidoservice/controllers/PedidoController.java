@@ -42,7 +42,7 @@ public class PedidoController {
             String erro = "Erro ao salvar criar um novo pedido: " + e.getMessage();
             logger.error(erro);
             response.setErro(erro);
-            response.setDado(pedido);
+            response.setDado(null);
         }
         
         return response;

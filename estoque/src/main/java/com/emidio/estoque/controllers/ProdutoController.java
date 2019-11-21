@@ -1,7 +1,9 @@
 package com.emidio.estoque.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.emidio.estoque.dto.ProdutoDto;
 import com.emidio.estoque.entidades.Produto;
 import com.emidio.estoque.services.ProdutoService;
 import com.emidio.estoque.utils.Response;
@@ -23,14 +25,16 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping("/{id}")
-    public Response<Produto> obterProduto(@PathVariable(value = "id") int id){
+    public Response<ProdutoDto> obterProduto(@PathVariable(value = "id") int id){
     
-        Response<Produto> response = new Response<Produto>();
+        Response<ProdutoDto> response = new Response<ProdutoDto>();
 
         try {
             Produto produto = this.produtoService.getProduto(id);
 
-            response.setDado(produto);
+            ProdutoDto dto = transformObjectToDto(produto);
+
+            response.setDado(dto);
         } catch (Exception e) {
             
             response.setErro(e.getMessage());            
@@ -39,15 +43,31 @@ public class ProdutoController {
         return response;
     }
 
+    private ProdutoDto transformObjectToDto(Produto produto) {
+        ProdutoDto dto = new ProdutoDto();
+        dto.setId(produto.getId());
+        dto.setCodigo(produto.getCodigo());
+        dto.setNome(produto.getNome());
+        dto.setCategoria(produto.getCategoria().getNome());
+        dto.setCategoriaCodigo(produto.getCategoria().getCodigo());
+        dto.setFornecedor(produto.getFornecedor().getRazaoSocial());
+        dto.setFornecedorId(produto.getFornecedor().getId());
+        dto.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+        return dto;
+    }
+
     @GetMapping
-    public Response<List<Produto>> listarProduto(){
+    public Response<List<ProdutoDto>> listarProduto(){
     
-        Response<List<Produto>> response = new Response<List<Produto>>();
+        Response<List<ProdutoDto>> response = new Response<List<ProdutoDto>>();
 
         try {
-            List<Produto> produto = this.produtoService.listarProdutos();
+            List<Produto> produtoList = this.produtoService.listarProdutos();
+            List<ProdutoDto> listaDto = new ArrayList<ProdutoDto>();
 
-            response.setDado(produto);
+            produtoList.forEach(p -> listaDto.add(this.transformObjectToDto(p)));
+
+            response.setDado(listaDto);
         } catch (Exception e) {
             
             response.setErro(e.getMessage());            
