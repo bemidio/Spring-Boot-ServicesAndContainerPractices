@@ -1,6 +1,6 @@
-package com.emidio.checkinstall.repository;
+package com.emidio.clienteservice.repository;
 
-import com.emidio.checkinstall.entididade.Cliente;
+import com.emidio.clienteservice.entididade.Cliente;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

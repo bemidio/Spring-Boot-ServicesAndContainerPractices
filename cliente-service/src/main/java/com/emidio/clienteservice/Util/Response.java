@@ -1,4 +1,4 @@
-package com.emidio.checkinstall.Util;
+package com.emidio.clienteservice.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Response<T> {
         return dado;
     }
 
-    public void setDado(T obj)
+    public void setDado(final T obj)
     {
         this.dado = obj;
     }
@@ -31,7 +31,7 @@ public class Response<T> {
         return this.erros;
     }
 
-    public void setErro(String errorMessage){
+    public void setErro(final String errorMessage){
 
         this.getErros().add(errorMessage);
     }

@@ -1,4 +1,4 @@
-package com.emidio.checkinstall.aop;
+package com.emidio.clienteservice.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,7 +16,7 @@ public class ControllerAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(ControllerAspect.class);
 
-    @Before("within(com.emidio.checkinstall.controller.ClienteController)")
+    @Before("within(com.emidio.clienteservice.controller.ClienteController)")
     private void before(JoinPoint joinPoint){
 
         String chamador = joinPoint.getSignature().toString();

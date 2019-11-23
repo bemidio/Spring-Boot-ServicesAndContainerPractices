@@ -1,4 +1,4 @@
-package com.emidio.checkinstall.entididade;
+package com.emidio.clienteservice.entididade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

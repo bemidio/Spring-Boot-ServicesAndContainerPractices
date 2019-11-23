@@ -1,8 +1,8 @@
-package com.emidio.checkinstall.controller;
+package com.emidio.clienteservice.controller;
 
-import com.emidio.checkinstall.Util.Response;
-import com.emidio.checkinstall.entididade.Cliente;
-import com.emidio.checkinstall.repository.ClienteRepository;
+import com.emidio.clienteservice.Util.Response;
+import com.emidio.clienteservice.entididade.Cliente;
+import com.emidio.clienteservice.repository.ClienteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
