@@ -22,7 +22,6 @@ public class ClienteController {
     @Autowired
     private ClienteRepository repositorio;
 
-
     @GetMapping("/cliente/{id}")
     public Response<Cliente> getCliente(@PathVariable int id) {
 
@@ -35,10 +34,11 @@ public class ClienteController {
 
         return response;
     }
-    
+
     @GetMapping("/cliente/{id}/dependentes/{id-dependente}")
-    public Response<Cliente> getClientePorEmail(@PathVariable int id, @PathVariable(name = "id-dependente") int idDependente) {
-        
+    public Response<Cliente> getClientePorEmail(@PathVariable int id,
+            @PathVariable(name = "id-dependente") int idDependente) {
+
         Response<Cliente> response = new Response<Cliente>();
         Cliente cliente = this.repositorio.findById(id).get();
 
@@ -66,7 +66,4 @@ public class ClienteController {
         return response;
     }
 
-
-
-   
 }

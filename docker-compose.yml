@@ -23,3 +23,18 @@ services:
         environment:
             - URL_TO_ESTOQUE_SERVICE=http://estoque:8080/api/produtos/
             - AMBIENTE_EXECUCAO=Container
+    prometheus:
+        build:
+            context: prometheus
+            dockerfile: Dockerfile
+        container_name: prometheus-execucao
+        ports:
+            - 9090:9090
+        image: prometheus-imagem
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        ports:
+            - 3000:3000
+  
+            
