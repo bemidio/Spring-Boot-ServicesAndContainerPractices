@@ -1,7 +1,7 @@
 package com.emidio.estoque.dto;
 
 /**
- * ProdutoDto
+ * ProdutoDto  Hhh
  */
 public class ProdutoDto {
 
